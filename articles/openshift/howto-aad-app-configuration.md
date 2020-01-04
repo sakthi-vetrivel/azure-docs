@@ -29,8 +29,8 @@ Create a new Azure Active Directory global administrator user to sign in to your
 1. Go to the [Users-All users](https://portal.azure.com/#blade/Microsoft_AAD_IAM/UsersManagementMenuBlade/AllUsers) blade.
 2. Click **+New user** to open the **User** pane.
 3. Enter a **Name** for this user.
-4. Create a **User name** based on the name of the tenant you created, with  `.onmicrosoft.com` appended at the end. For example, `yourUserName@yourTenantName.onmicrosoft.com`. Write down this user name. You'll need it to sign in to your cluster.
-5. Click **Directory role** to open the directory role pane, and select **Global administrator** and then click **Ok** at the bottom of the pane.
+4. Create a **User name** based on the name of the tenant you created, with  `yourTenantName.onmicrosoft.com` appended at the end. For example, `yourUserName@yourTenantName.onmicrosoft.com`. Keep track of this user name. You'll need it to sign in to your cluster.
+5. Under **Groups and roles**, click the current 'Roles' value to open the directory role pane. From there, select **Global administrator** and then click **Select** at the bottom of the pane.
 6. In the **User** pane, click **Show Password** and record the temporary password. After you sign in the first time, you'll be prompted to reset it.
 7. At the bottom of the pane, click **Create** to create the user.
 
@@ -40,20 +40,17 @@ To grant cluster admin access, the memberships in an Azure AD security group are
 
 1. Open the [Azure Active Directory groups](https://portal.azure.com/#blade/Microsoft_AAD_IAM/GroupsManagementMenuBlade/AllGroups) blade.
 2. Click **+New Group**.
-3. Provide a group name and description.
-4. Set **Group type** to **Security**.
+3. Set **Group type** to **Security**
+4. Provide a group name and description.
 5. Set **Membership type** to **Assigned**.
 
-    Add the Azure AD user that you created in the earlier step to this security group.
+Now, add the Azure AD user that you created in the earlier step to this security group.
 
-6. Click **Members** to open the **Select members** pane.
+6. Click **Members** to open the **Add members** pane.
 7. In the members list, select the Azure AD user that you created above.
-8. At the bottom of the portal, click on **Select** and then **Create** to create the security group.
+8. At the bottom of the pane, click on **Select** and then **Create** to create the security group.
 
-    Write down the Group ID value.
-
-9. When the group is created, you will see it in the list of all groups. Click on the new group.
-10. On the page that appears, copy down the **Object ID**. We will refer to this value as `GROUPID` in the [Create an Azure Red Hat OpenShift cluster](tutorial-create-cluster.md) tutorial.
+Once the group is created, copy down the **Object ID** of the group. We will refer to this value as `GROUPID` in the [Create an Azure Red Hat OpenShift cluster](tutorial-create-cluster.md) tutorial.
 
 ## Create an Azure AD app registration
 
@@ -64,7 +61,7 @@ If your organization doesn't already have an Azure Active Directory (Azure AD) a
 1. Open the [App registrations blade](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredAppsPreview) and click **+New  registration**.
 2. In the **Register an application** pane, enter a name for your application registration.
 3. Ensure that under **Supported account types** that **Accounts in this organizational directory only** is selected. This is the most secure choice.
-4. We will add a redirect URI later once we know the URI of the cluster. Click the **Register** button to create the Azure AD application registration.
+4. We will later add a redirect URI once we know the cluster's URI. Click the **Register** button to create the Azure AD application registration.
 5. On the page that appears, copy down the **Application (client) ID**. We will refer to this value as `APPID` in the [Create an Azure Red Hat OpenShift cluster](tutorial-create-cluster.md) tutorial.
 
 ![Screenshot of app object page](./media/howto-create-tenant/get-app-id.png)
@@ -88,8 +85,8 @@ For details on creating a new Azure AD application, see [Register an app with th
 
 ## Add API permissions
 
-1. In the **Manage** section click **API permissions**.
-2. Click **Add permission** and select **Azure Active Directory Graph** then **Delegated permissions**
+1. Navigate back to the App Registrations blad and select the app registration you would like to use. In the **Manage** section, click **API permissions**.
+2. Click **Add permission** and select **Microsoft Graph** then **Delegated permissions**
 3. Expand **User** on the list below and make sure **User.Read** is enabled.
 4. Scroll up and select **Application permissions**.
 5. Expand **Directory** on the list below and enable **Directory.ReadAll**
