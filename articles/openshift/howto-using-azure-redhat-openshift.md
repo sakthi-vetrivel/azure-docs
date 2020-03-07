@@ -1,6 +1,6 @@
 ---
 title: Create an Azure Red Hat OpenShift 4.3 Cluster | Microsoft Docs
-description: Create a cluster with Azure Red Hat OpenShift 3.11
+description: Create a cluster with Azure Red Hat OpenShift 4.3
 author: lamek
 ms.author: suvetriv
 ms.service: container-service
